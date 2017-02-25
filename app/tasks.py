@@ -1,0 +1,130 @@
+# -*- coding: utf-8 -*-
+from celery import Celery
+import os, smtplib, logging, config, paramiko
+from models import Stats, save, update
+from email.mime.text import MIMEText
+
+logger = logging.getLogger(__name__)
+app = Celery('tasks', broker=config.CELERY_BROKER)
+
+@app.task
+def upload_collector(ip, port, user, passwd):
+	"""This method uses the provided input to ssh the client machine and uploads
+	client.sh . sftp.put is used for uploading the file.
+
+	Attributes:
+		ip (str): IP address of client machine
+		PORT (int): Port to connect on with client machine
+		USERNAME (str): Client instance's username
+		PASSWORD (str): Client instance's password
+	"""
+
+	try:
+		#key = paramiko.RSAKey(data=base64.b64decode('AAA...'))
+		client = paramiko.SSHClient()
+		
+		client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+		
+		#client.get_host_keys().add('ssh.example.com', 'ssh-rsa', key)
+
+		#In case the server's key is unknown,
+		#we will be adding it automatically to the list of known hosts
+		client.load_host_keys(os.path.expanduser(os.path.join("~", ".ssh", "known_hosts")))
+		
+		client.connect(ip, port=port, username=user, password=passwd)		
+
+		logger.info('Transfering files to and from the remote machine')
+		sftp = client.open_sftp()
+		client_file = os.path.abspath(os.path.join(config.CLIENT_FILE))
+		sftp.put(client_file, config.CLIENT_REMOTE_PATH)
+		sftp.close()
+
+		logger.info('Starting client on %s:%s' % (ip, port))
+		stdin, stdout, stderr = client.exec_command('(cd /tmp; chmod u+x client.sh; ./client.sh)')
+
+		output = stdout.readlines()
+		process_response(ip, float(output[0]), float(output[1]))
+
+		logger.info('Closing ssh connection')
+		client.close()
+
+	except Exception, e:
+		logger.info("[-] Caught exception: " + str(e))
+		try:
+		    session.close()
+		except:
+		    pass
+
+	
+def process_response(ip, cpu_usage, mem_usage):
+	"""process_response is used to  save the response 
+	to sqlite DB and and send email alerts.
+
+	Attributes:
+		ip (str): IP address of client machine
+		cpu_usage (int): Percent CPU usage of client machine
+		mem_usage (str): Percent MEMORY usage of client machine
+	"""
+	try:
+		
+		stats = update(ip, cpu_usage, mem_usage)
+		save(stats, "Stats for ip: %s successfully updated." % ip)
+		cpu_alert, mem_alert = check_threshold(stats)
+
+	except Exception as e:
+		raise e
+
+@app.task
+def send_email(receiver, subject, body):
+	"""This method sends emails in the background so that 
+	the running process won't get block. 
+
+	Attributes:
+		receiver (str): Email address of the person who will recieve the email.
+		subject (str): Subject of the email.
+		body (int): Text message of the email.
+	"""
+	sender = config.MAIL_DEFAULT_SENDER
+	msg = MIMEText(body, 'html')
+	msg['Subject']=  subject
+	msg['From'] = sender
+	try:
+		smtpObj = smtplib.SMTP(config.MAIL_SERVER, config.MAIL_PORT)
+		smtpObj.set_debuglevel(1)
+		smtpObj.login(config.MAIL_USERNAME, config.MAIL_PASSWORD)
+		smtpObj.sendmail(sender, [receiver], msg.as_string()) 
+		smtpObj.quit()    
+		logging.info("Successfully sent email")
+	except smtplib.SMTPException:
+		logging.info("Error: unable to send email")
+
+def get_subject_text(device):
+	return "Alert for your instance's {} usage".format(device)
+
+def get_message_text(device, threshold, usage):
+	return """Your {} usage has crossed your threshold.
+			
+			<h2>{} threshold: {}%</h2>
+			<h2>{} current usage: {}%</h2>
+		""".format(device, device, threshold, device, usage)
+
+def check_threshold(stats):
+	"""Checks if any of the stats we have collected is crossing the 
+	threshold client has provided.
+
+	Attributes:
+		stats (Stats): Client's machine stats. Sqlalchemy model
+	"""
+	cpu_alert = mem_alert = False
+	if stats.cpu_usage > stats.cpu_threshold:
+		cpu_alert = True
+		send_email.delay(stats.email, 
+			get_subject_text("CPU"), get_message_text("CPU", stats.cpu_threshold, stats.cpu_usage))
+
+	if stats.mem_usage > stats.mem_threshold:
+		mem_alert = True
+		send_email.delay(stats.email, 
+			get_subject_text("MEMORY"), get_message_text("MEMORY", stats.mem_threshold, stats.mem_usage))
+	return cpu_alert, mem_alert
+
+
