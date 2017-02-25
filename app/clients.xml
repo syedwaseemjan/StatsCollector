@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<data>
-	<client ip='52.91.223.252' port='22' username='crossover' password='m21sosg91t...' mail="syedwaseemjan@gmail.com">    
-	    <alert type="memory" limit="50%" />
-	    <alert type="cpu" limit="20%" />
-	</client>
-</data>
