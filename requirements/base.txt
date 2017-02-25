@@ -1,0 +1,3 @@
+SQLAlchemy==1.4.36
+celery==5.2.6
+paramiko==2.10.4
