@@ -1,0 +1,366 @@
+2017-02-25 16:52:15,550 - main - INFO - Config file path: /Users/waseem/Documents/StatsCollector/app/clients.xml
+2017-02-25 16:52:15,550 - main - INFO - Start parsing clients file
+2017-02-25 16:52:15,551 - main - INFO - IP: 52.91.223.252, Port: 22, Username: crossover, Password: m21sosg91t...
+2017-02-25 16:59:48,997 - main - INFO - Config file path: /Users/waseem/Documents/StatsCollector/app/clients.xml
+2017-02-25 16:59:48,997 - main - INFO - Start parsing clients file
+2017-02-25 16:59:48,998 - main - INFO - IP: 52.91.223.252, Port: 22, Username: crossover, Password: m21sosg91t...
+2017-02-25 17:18:05,745 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:18:05,749 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:18:05,750 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:18:05,753 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:18:05,753 - app.main - INFO - Config file path: /Users/waseem/Documents/StatsCollector/tests/clients_incorrent.xml
+2017-02-25 17:18:05,754 - app.main - INFO - Start parsing clients file
+2017-02-25 17:18:05,754 - app.main - ERROR - mismatched tag: line 6, column 2
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 656, in parse
+    parser.feed(data)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1642, in feed
+    self._raiseerror(v)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1506, in _raiseerror
+    raise err
+ParseError: mismatched tag: line 6, column 2
+2017-02-25 17:18:05,755 - app.main - INFO - Config file path: wrong_path
+2017-02-25 17:18:05,755 - app.main - INFO - Start parsing clients file
+2017-02-25 17:18:05,755 - app.main - ERROR - [Errno 2] No such file or directory: 'wrong_path'
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 647, in parse
+    source = open(source, "rb")
+IOError: [Errno 2] No such file or directory: 'wrong_path'
+2017-02-25 17:18:16,828 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:18:16,833 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:18:16,835 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:18:16,838 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:18:16,839 - app.main - INFO - Config file path: /Users/waseem/Documents/StatsCollector/tests/clients_incorrent.xml
+2017-02-25 17:18:16,839 - app.main - INFO - Start parsing clients file
+2017-02-25 17:18:16,839 - app.main - ERROR - mismatched tag: line 6, column 2
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 656, in parse
+    parser.feed(data)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1642, in feed
+    self._raiseerror(v)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1506, in _raiseerror
+    raise err
+ParseError: mismatched tag: line 6, column 2
+2017-02-25 17:18:16,841 - app.main - INFO - Config file path: wrong_path
+2017-02-25 17:18:16,841 - app.main - INFO - Start parsing clients file
+2017-02-25 17:18:16,841 - app.main - ERROR - [Errno 2] No such file or directory: 'wrong_path'
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 647, in parse
+    source = open(source, "rb")
+IOError: [Errno 2] No such file or directory: 'wrong_path'
+2017-02-25 17:19:43,694 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:19:43,699 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:19:43,700 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:19:43,703 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:19:43,703 - app.main - INFO - Config file path: /Users/waseem/Documents/StatsCollector/tests/clients_incorrent.xml
+2017-02-25 17:19:43,703 - app.main - INFO - Start parsing clients file
+2017-02-25 17:19:43,704 - app.main - ERROR - mismatched tag: line 6, column 2
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 656, in parse
+    parser.feed(data)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1642, in feed
+    self._raiseerror(v)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1506, in _raiseerror
+    raise err
+ParseError: mismatched tag: line 6, column 2
+2017-02-25 17:19:43,705 - app.main - INFO - Config file path: wrong_path
+2017-02-25 17:19:43,705 - app.main - INFO - Start parsing clients file
+2017-02-25 17:19:43,705 - app.main - ERROR - [Errno 2] No such file or directory: 'wrong_path'
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 647, in parse
+    source = open(source, "rb")
+IOError: [Errno 2] No such file or directory: 'wrong_path'
+2017-02-25 17:19:54,649 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:19:54,653 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:19:54,655 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:19:54,657 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:19:54,658 - app.main - INFO - Config file path: /Users/waseem/Documents/StatsCollector/tests/clients_incorrent.xml
+2017-02-25 17:19:54,658 - app.main - INFO - Start parsing clients file
+2017-02-25 17:19:54,658 - app.main - ERROR - mismatched tag: line 6, column 2
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 656, in parse
+    parser.feed(data)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1642, in feed
+    self._raiseerror(v)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1506, in _raiseerror
+    raise err
+ParseError: mismatched tag: line 6, column 2
+2017-02-25 17:19:54,659 - app.main - INFO - Config file path: wrong_path
+2017-02-25 17:19:54,659 - app.main - INFO - Start parsing clients file
+2017-02-25 17:19:54,659 - app.main - ERROR - [Errno 2] No such file or directory: 'wrong_path'
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 647, in parse
+    source = open(source, "rb")
+IOError: [Errno 2] No such file or directory: 'wrong_path'
+2017-02-25 17:20:32,745 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:32,751 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:32,753 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:32,756 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:32,756 - app.main - INFO - Config file path: /Users/waseem/Documents/StatsCollector/tests/clients_incorrent.xml
+2017-02-25 17:20:32,757 - app.main - INFO - Start parsing clients file
+2017-02-25 17:20:32,757 - app.main - ERROR - mismatched tag: line 6, column 2
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 656, in parse
+    parser.feed(data)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1642, in feed
+    self._raiseerror(v)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1506, in _raiseerror
+    raise err
+ParseError: mismatched tag: line 6, column 2
+2017-02-25 17:20:32,758 - app.main - INFO - Config file path: wrong_path
+2017-02-25 17:20:32,758 - app.main - INFO - Start parsing clients file
+2017-02-25 17:20:32,758 - app.main - ERROR - [Errno 2] No such file or directory: 'wrong_path'
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 647, in parse
+    source = open(source, "rb")
+IOError: [Errno 2] No such file or directory: 'wrong_path'
+2017-02-25 17:20:32,759 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:32,761 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:32,763 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:32,766 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:32,766 - app.main - INFO - Config file path: /Users/waseem/Documents/StatsCollector/tests/clients_incorrent.xml
+2017-02-25 17:20:32,766 - app.main - INFO - Start parsing clients file
+2017-02-25 17:20:32,766 - app.main - ERROR - mismatched tag: line 6, column 2
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 656, in parse
+    parser.feed(data)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1642, in feed
+    self._raiseerror(v)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1506, in _raiseerror
+    raise err
+ParseError: mismatched tag: line 6, column 2
+2017-02-25 17:20:32,767 - app.main - INFO - Config file path: wrong_path
+2017-02-25 17:20:32,767 - app.main - INFO - Start parsing clients file
+2017-02-25 17:20:32,767 - app.main - ERROR - [Errno 2] No such file or directory: 'wrong_path'
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 647, in parse
+    source = open(source, "rb")
+IOError: [Errno 2] No such file or directory: 'wrong_path'
+2017-02-25 17:20:44,972 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:44,977 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:44,978 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:44,981 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:44,981 - app.main - INFO - Config file path: /Users/waseem/Documents/StatsCollector/tests/clients_incorrent.xml
+2017-02-25 17:20:44,981 - app.main - INFO - Start parsing clients file
+2017-02-25 17:20:44,982 - app.main - ERROR - mismatched tag: line 6, column 2
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 656, in parse
+    parser.feed(data)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1642, in feed
+    self._raiseerror(v)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1506, in _raiseerror
+    raise err
+ParseError: mismatched tag: line 6, column 2
+2017-02-25 17:20:44,983 - app.main - INFO - Config file path: wrong_path
+2017-02-25 17:20:44,983 - app.main - INFO - Start parsing clients file
+2017-02-25 17:20:44,983 - app.main - ERROR - [Errno 2] No such file or directory: 'wrong_path'
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 647, in parse
+    source = open(source, "rb")
+IOError: [Errno 2] No such file or directory: 'wrong_path'
+2017-02-25 17:20:56,839 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:56,844 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:56,846 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:56,848 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:20:56,849 - app.main - INFO - Config file path: /Users/waseem/Documents/StatsCollector/tests/clients_incorrent.xml
+2017-02-25 17:20:56,849 - app.main - INFO - Start parsing clients file
+2017-02-25 17:20:56,849 - app.main - ERROR - mismatched tag: line 6, column 2
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 656, in parse
+    parser.feed(data)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1642, in feed
+    self._raiseerror(v)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1506, in _raiseerror
+    raise err
+ParseError: mismatched tag: line 6, column 2
+2017-02-25 17:20:56,850 - app.main - INFO - Config file path: wrong_path
+2017-02-25 17:20:56,850 - app.main - INFO - Start parsing clients file
+2017-02-25 17:20:56,850 - app.main - ERROR - [Errno 2] No such file or directory: 'wrong_path'
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 647, in parse
+    source = open(source, "rb")
+IOError: [Errno 2] No such file or directory: 'wrong_path'
+2017-02-25 17:22:18,897 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:22:18,901 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:22:18,903 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:22:18,906 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:22:18,906 - app.main - INFO - Config file path: /Users/waseem/Documents/StatsCollector/tests/clients_incorrent.xml
+2017-02-25 17:22:18,906 - app.main - INFO - Start parsing clients file
+2017-02-25 17:22:18,907 - app.main - ERROR - mismatched tag: line 6, column 2
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 656, in parse
+    parser.feed(data)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1642, in feed
+    self._raiseerror(v)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1506, in _raiseerror
+    raise err
+ParseError: mismatched tag: line 6, column 2
+2017-02-25 17:22:18,908 - app.main - INFO - Config file path: wrong_path
+2017-02-25 17:22:18,908 - app.main - INFO - Start parsing clients file
+2017-02-25 17:22:18,908 - app.main - ERROR - [Errno 2] No such file or directory: 'wrong_path'
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 647, in parse
+    source = open(source, "rb")
+IOError: [Errno 2] No such file or directory: 'wrong_path'
+2017-02-25 17:25:55,779 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:25:55,785 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:25:55,787 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:25:55,790 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:25:55,790 - app.main - INFO - Config file path: /Users/waseem/Documents/StatsCollector/tests/clients_incorrent.xml
+2017-02-25 17:25:55,790 - app.main - INFO - Start parsing clients file
+2017-02-25 17:25:55,791 - app.main - ERROR - mismatched tag: line 6, column 2
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 656, in parse
+    parser.feed(data)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1642, in feed
+    self._raiseerror(v)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1506, in _raiseerror
+    raise err
+ParseError: mismatched tag: line 6, column 2
+2017-02-25 17:25:55,792 - app.main - INFO - Config file path: wrong_path
+2017-02-25 17:25:55,792 - app.main - INFO - Start parsing clients file
+2017-02-25 17:25:55,792 - app.main - ERROR - [Errno 2] No such file or directory: 'wrong_path'
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 647, in parse
+    source = open(source, "rb")
+IOError: [Errno 2] No such file or directory: 'wrong_path'
+2017-02-25 17:25:59,240 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:25:59,246 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:25:59,248 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:25:59,250 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:25:59,251 - app.main - INFO - Config file path: /Users/waseem/Documents/StatsCollector/tests/clients_incorrent.xml
+2017-02-25 17:25:59,251 - app.main - INFO - Start parsing clients file
+2017-02-25 17:25:59,251 - app.main - ERROR - mismatched tag: line 6, column 2
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 656, in parse
+    parser.feed(data)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1642, in feed
+    self._raiseerror(v)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1506, in _raiseerror
+    raise err
+ParseError: mismatched tag: line 6, column 2
+2017-02-25 17:25:59,252 - app.main - INFO - Config file path: wrong_path
+2017-02-25 17:25:59,252 - app.main - INFO - Start parsing clients file
+2017-02-25 17:25:59,252 - app.main - ERROR - [Errno 2] No such file or directory: 'wrong_path'
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 647, in parse
+    source = open(source, "rb")
+IOError: [Errno 2] No such file or directory: 'wrong_path'
+2017-02-25 17:26:38,473 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:26:38,478 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:26:38,479 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:26:38,482 - app.main - INFO - IP: 11.11.11.11, Port: 22, Username: test_username, Password: test_password
+2017-02-25 17:26:38,483 - app.main - INFO - Config file path: /Users/waseem/Documents/StatsCollector/tests/clients_incorrent.xml
+2017-02-25 17:26:38,483 - app.main - INFO - Start parsing clients file
+2017-02-25 17:26:38,483 - app.main - ERROR - mismatched tag: line 6, column 2
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 656, in parse
+    parser.feed(data)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1642, in feed
+    self._raiseerror(v)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1506, in _raiseerror
+    raise err
+ParseError: mismatched tag: line 6, column 2
+2017-02-25 17:26:38,484 - app.main - INFO - Config file path: wrong_path
+2017-02-25 17:26:38,484 - app.main - INFO - Start parsing clients file
+2017-02-25 17:26:38,484 - app.main - ERROR - [Errno 2] No such file or directory: 'wrong_path'
+Traceback (most recent call last):
+  File "/Users/waseem/Documents/StatsCollector/app/main.py", line 83, in process_clients
+    tree = ET.parse(file_path)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 1182, in parse
+    tree.parse(source, parser)
+  File "/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/xml/etree/ElementTree.py", line 647, in parse
+    source = open(source, "rb")
+IOError: [Errno 2] No such file or directory: 'wrong_path'
