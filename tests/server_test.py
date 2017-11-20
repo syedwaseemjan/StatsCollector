@@ -28,7 +28,7 @@ class ServerTestCase(StatsCollectorAppTestCase):
 
     def test_process_clients_file_incorrect_syntax(self):
         clients_list = os.path.join(os.path.dirname(
-            __file__), 'clients_incorrent.xml')
+            __file__), 'clients_incorrect.xml')
         self.assertRaises(ET.ParseError, process_clients, clients_list)
 
     def test_parse_client(self):
