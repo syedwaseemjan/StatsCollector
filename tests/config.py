@@ -1,10 +1,10 @@
-SERVER="localhost"
-SSH_PORT=6666
-CLIENT_FILE="client.sh"
-CLIENT_REMOTE_PATH="/tmp/"+CLIENT_FILE
+SERVER = "localhost"
+SSH_PORT = 6666
+CLIENT_FILE = "client.sh"
+CLIENT_REMOTE_PATH = "/tmp/" + CLIENT_FILE
 DB_URI = "test.db"
 
-CELERY_BROKER = 'amqp://guest@localhost//'
+CELERY_BROKER = 'amqp://guest@172.17.0.2//'
 
 MAIL_DEFAULT_SENDER = ''
 MAIL_SERVER = 'smtpout.secureserver.net'

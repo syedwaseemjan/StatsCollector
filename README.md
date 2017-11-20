@@ -47,7 +47,7 @@ The following assumes you have all of the recommended tools listed above install
 
 ## 2. Instructions to create and initialize the database
 
-    No worries. I have used sqlalchemy which will take care of initializing Database for the first time. You don't need to do anything for it.
+    No worries. I have used sqlalchemy which will take care of initializing Database for the first time. You don't have to do anything for it.
 
 ## 3. Assumptions I have made.
 
