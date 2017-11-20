@@ -14,10 +14,10 @@ from sqlalchemy import Column, String, Float, DateTime
 import os
 import logging
 from datetime import datetime
-from config import DB_URI
+from config import DB_URI, SQLALCHEMY_ECHO
 from sqlalchemy.exc import IntegrityError
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 
 Base = declarative_base()
 
@@ -31,6 +31,7 @@ class Stats(Base):
     cpu_usage = Column(Float)
     mem_threshold = Column(Float, nullable=False)
     mem_usage = Column(Float)
+    uptime = Column(String(128))
     email = Column(String(128))
     created_at = Column(DateTime, default=datetime.utcnow)
 
@@ -51,14 +52,15 @@ def get_or_create(ip, cpu_threshold, mem_threshold, email, *args, **kwargs):
     return stats
 
 
-def update(ip, cpu_usage, mem_usage):
+def update(ip, cpu_usage, mem_usage, uptime):
     stats = dal.session.query(Stats).filter(Stats.ip == ip).one()
     stats.cpu_usage = cpu_usage
     stats.mem_usage = mem_usage
+    stats.uptime = uptime
     return stats
 
 
-def save(model, msg):
+def save(model):
     dal.session.add(model)
     try:
         dal.session.commit()
@@ -75,8 +77,9 @@ class DataAccessLayer(object):
     conn_string = 'sqlite:///{}'.format(db_path)
 
     def __init__(self, conn_string=None):
-        print conn_string
-        self.engine = create_engine(conn_string or self.conn_string, echo=True)
+        logger.info(conn_string)
+        self.engine = create_engine(conn_string or self.conn_string,
+                                    echo=SQLALCHEMY_ECHO)
         Session = sessionmaker(bind=self.engine)
         self.session = Session()
         Base.metadata.create_all(self.engine)

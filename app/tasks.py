@@ -8,7 +8,7 @@ import paramiko
 from models import save, update
 from email.mime.text import MIMEText
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 app = Celery('tasks', broker=config.CELERY_BROKER)
 
 
@@ -25,15 +25,10 @@ def upload_collector(ip, port, user, passwd):
     """
 
     try:
-        # key = paramiko.RSAKey(data=base64.b64decode('AAA...'))
         client = paramiko.SSHClient()
-
-        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
-        # client.get_host_keys().add('ssh.example.com', 'ssh-rsa', key)
-
         # In case the server's key is unknown,
         # we will be adding it automatically to the list of known hosts
+        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         client.load_host_keys(os.path.expanduser(
             os.path.join("~", ".ssh", "known_hosts")))
 
@@ -50,20 +45,21 @@ def upload_collector(ip, port, user, passwd):
             '(cd /tmp; chmod u+x client.sh; ./client.sh)')
 
         output = stdout.readlines()
-        process_response(ip, float(output[0]), float(output[1]))
+        process_response(ip, float(output[0]), float(
+            output[1]), output[2])
 
         logger.info('Closing ssh connection')
         client.close()
 
     except Exception, e:
-        logger.info("[-] Caught exception: " + str(e))
+        logger.exception(e)
         try:
-            session.close()
+            client.close()
         except:
             pass
 
 
-def process_response(ip, cpu_usage, mem_usage):
+def process_response(ip, cpu_usage, mem_usage, uptime):
     """process_response is used to  save the response
     to sqlite DB and and send email alerts.
 
@@ -74,8 +70,8 @@ def process_response(ip, cpu_usage, mem_usage):
     """
     try:
 
-        stats = update(ip, cpu_usage, mem_usage)
-        save(stats, "Stats for ip: %s successfully updated." % ip)
+        stats = update(ip, cpu_usage, mem_usage, uptime)
+        save(stats)
         cpu_alert, mem_alert = check_threshold(stats)
 
     except Exception as e:
@@ -103,8 +99,8 @@ def send_email(receiver, subject, body):
         smtpObj.sendmail(sender, [receiver], msg.as_string())
         smtpObj.quit()
         logging.info("Successfully sent email")
-    except smtplib.SMTPException:
-        logging.info("Error: unable to send email")
+    except smtplib.SMTPException as e:
+        logging.exception(e)
 
 
 def get_subject_text(device):

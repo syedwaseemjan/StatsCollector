@@ -3,8 +3,9 @@ SSH_PORT = 6666
 CLIENT_FILE = "client.sh"
 CLIENT_REMOTE_PATH = "/tmp/" + CLIENT_FILE
 DB_URI = "test.db"
+SQLALCHEMY_ECHO = False
 
-CELERY_BROKER = 'amqp://guest@172.17.0.2//'
+CELERY_BROKER = 'amqp://guest@localhost//'
 
 MAIL_DEFAULT_SENDER = ''
 MAIL_SERVER = 'smtpout.secureserver.net'

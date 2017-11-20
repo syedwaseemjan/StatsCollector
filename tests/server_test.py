@@ -11,7 +11,7 @@ from mock import patch
 
 class ServerTestCase(StatsCollectorAppTestCase):
     """
-            #ServerTestCase constains all unit tests for StatsCollector App.
+    ServerTestCase constains all unit tests for StatsCollector App.
     """
 
     def setUp(self):
