@@ -8,5 +8,3 @@ if libdir not in sys.path:
 libdir = os.path.abspath(os.path.join(thisdir, '../app'))
 if libdir not in sys.path:
     sys.path.insert(0, libdir)
-
-print sys.path

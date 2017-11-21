@@ -36,15 +36,13 @@ The following assumes you have all of the recommended tools listed above install
 
 #### 3. Run the celery background task:
 	
-    $ cd app
-    $ celery -A tasks worker --loglevel=info -f ../server.log &
+    $ celery -A app.tasks worker --loglevel=info -f server.log &
 
     Celery is dependent on RabbitMq. RabbitMq is supposed to be setup and running before starting the celery app.
 
 #### 4. Run the script:
     
-    $ cd ..
-    $ ./bin/server.py 
+    $ ./bin/server.py
 
 ## 2. Instructions to create and initialize the database.
 

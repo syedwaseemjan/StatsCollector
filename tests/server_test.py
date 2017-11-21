@@ -2,8 +2,8 @@
 from . import StatsCollectorAppTestCase
 from app.tasks import check_threshold, get_subject_text, \
     get_message_text
-from app.models import get_or_create
-from app.main import process_clients, parse_client
+from app.models import Stats
+from app.main import Main
 import os
 import xml.etree.ElementTree as ET
 from mock import patch
@@ -24,17 +24,17 @@ class ServerTestCase(StatsCollectorAppTestCase):
         return root.findall('client')
 
     def test_process_clients_wrong_file_path(self):
-        self.assertRaises(IOError, process_clients, "wrong_path")
+        self.assertRaises(IOError, Main().process_clients, "wrong_path")
 
     def test_process_clients_file_incorrect_syntax(self):
         clients_list = os.path.join(os.path.dirname(
             __file__), 'clients_incorrect.xml')
-        self.assertRaises(ET.ParseError, process_clients, clients_list)
+        self.assertFalse(Main().process_clients(clients_list))
 
     def test_parse_client(self):
         clients = self.get_client_nodes()
         self.assertEqual(1, len(clients))
-        data = parse_client(clients[0])
+        data = Main().parse_client(clients[0])
         self.assertEqual(type({}), type(data))
         self.assertEqual(data["ip"], "11.11.11.11")
         self.assertEqual(data["port"], 22)
@@ -46,8 +46,8 @@ class ServerTestCase(StatsCollectorAppTestCase):
 
     def test_get_or_create(self):
         clients = self.get_client_nodes()
-        data = parse_client(clients[0])
-        stats = get_or_create(**data)
+        data = Main().parse_client(clients[0])
+        stats = Stats.get_or_create(**data)
         self.assertEqual(stats.ip, '11.11.11.11')
 
     def test_get_subject_text(self):
@@ -60,11 +60,11 @@ class ServerTestCase(StatsCollectorAppTestCase):
 
     def test_check_threshold(self):
         clients = self.get_client_nodes()
-        data = parse_client(clients[0])
-        stats = get_or_create(**data)
+        data = Main().parse_client(clients[0])
+        stats = Stats.get_or_create(**data)
 
         with patch("app.tasks.send_email.delay"):
-            data = parse_client(clients[0])
+            data = Main().parse_client(clients[0])
             stats.cpu_usage = 18
             stats.mem_usage = 55
             cpu_alert, mem_alert = check_threshold(stats)

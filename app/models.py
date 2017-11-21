@@ -14,7 +14,7 @@ from sqlalchemy import Column, String, Float, DateTime
 import os
 import logging
 from datetime import datetime
-from config import DB_URI, SQLALCHEMY_ECHO
+from app import settings
 from sqlalchemy.exc import IntegrityError
 
 logger = logging.getLogger()
@@ -22,7 +22,40 @@ logger = logging.getLogger()
 Base = declarative_base()
 
 
-class Stats(Base):
+class Common(object):
+    @classmethod
+    def get_or_create(cls, ip, cpu_threshold, mem_threshold, email,
+                      *args, **kwargs):
+        stats = dal.session.query(Stats).filter(Stats.ip == ip).first()
+        if not stats:
+            stats = Stats()
+        stats.ip = ip
+        stats.cpu_threshold = cpu_threshold
+        stats.mem_threshold = mem_threshold
+        stats.email = email
+        return stats
+
+    @classmethod
+    def update(cls, ip, cpu_usage, mem_usage, uptime):
+        stats = dal.session.query(Stats).filter(Stats.ip == ip).one()
+        stats.cpu_usage = cpu_usage
+        stats.mem_usage = mem_usage
+        stats.uptime = uptime
+        return stats
+
+    @classmethod
+    def save(cls, model):
+        dal.session.add(model)
+        try:
+            dal.session.commit()
+            logger.info(
+                "Stats record for ip: %s successfully added." % model.ip)
+        except IntegrityError, exc:
+            dal.session.rollback()
+            logger.exception('error: %s' % exc.message)
+
+
+class Stats(Base, Common):
 
     __tablename__ = 'stats'
 
@@ -41,45 +74,18 @@ class Stats(Base):
             (self.ip, self.cpu_usage, self.mem_usage, str_created_at)
 
 
-def get_or_create(ip, cpu_threshold, mem_threshold, email, *args, **kwargs):
-    stats = dal.session.query(Stats).filter(Stats.ip == ip).first()
-    if not stats:
-        stats = Stats()
-    stats.ip = ip
-    stats.cpu_threshold = cpu_threshold
-    stats.mem_threshold = mem_threshold
-    stats.email = email
-    return stats
-
-
-def update(ip, cpu_usage, mem_usage, uptime):
-    stats = dal.session.query(Stats).filter(Stats.ip == ip).one()
-    stats.cpu_usage = cpu_usage
-    stats.mem_usage = mem_usage
-    stats.uptime = uptime
-    return stats
-
-
-def save(model):
-    dal.session.add(model)
-    try:
-        dal.session.commit()
-        logger.info("Stats record for ip: %s successfully added." % model.ip)
-    except IntegrityError, exc:
-        dal.session.rollback()
-        logger.exception('error: %s' % exc.message)
-
-
 class DataAccessLayer(object):
     session = None
     engine = None
-    db_path = os.path.join(os.path.dirname(__file__), DB_URI)
+    db_path = os.path.abspath(os.path.join(os.path.dirname(
+        __file__), '..', settings.get("STATS", "DB_URI")))
     conn_string = 'sqlite:///{}'.format(db_path)
 
     def __init__(self, conn_string=None):
         logger.info(conn_string)
-        self.engine = create_engine(conn_string or self.conn_string,
-                                    echo=SQLALCHEMY_ECHO)
+        self.engine = create_engine(
+            conn_string or self.conn_string,
+            echo=settings.get("STATS", "SQLALCHEMY_ECHO", boolean=True))
         Session = sessionmaker(bind=self.engine)
         self.session = Session()
         Base.metadata.create_all(self.engine)

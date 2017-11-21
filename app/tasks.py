@@ -3,13 +3,13 @@ from celery import Celery
 import os
 import smtplib
 import logging
-import config
 import paramiko
-from models import save, update
+from models import Stats
 from email.mime.text import MIMEText
+from app import settings
 
 logger = logging.getLogger()
-app = Celery('tasks', broker=config.CELERY_BROKER)
+app = Celery('tasks', broker=settings.get("STATS", "CELERY_BROKER"))
 
 
 @app.task
@@ -25,6 +25,7 @@ def upload_collector(ip, port, user, passwd):
     """
 
     try:
+        logger.info('Connecting to client %s:%s ...' % (ip, port))
         client = paramiko.SSHClient()
         # In case the server's key is unknown,
         # we will be adding it automatically to the list of known hosts
@@ -36,8 +37,9 @@ def upload_collector(ip, port, user, passwd):
 
         logger.info('Transfering files to and from the remote machine')
         sftp = client.open_sftp()
-        client_file = os.path.abspath(os.path.join(config.CLIENT_FILE))
-        sftp.put(client_file, config.CLIENT_REMOTE_PATH)
+        client_file = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), settings.get("STATS", "CLIENT_FILE")))
+        sftp.put(client_file, settings.get("STATS", "CLIENT_REMOTE_PATH"))
         sftp.close()
 
         logger.info('Starting client on %s:%s' % (ip, port))
@@ -70,8 +72,8 @@ def process_response(ip, cpu_usage, mem_usage, uptime):
     """
     try:
 
-        stats = update(ip, cpu_usage, mem_usage, uptime)
-        save(stats)
+        stats = Stats.update(ip, cpu_usage, mem_usage, uptime)
+        Stats.save(stats)
         cpu_alert, mem_alert = check_threshold(stats)
 
     except Exception as e:
@@ -88,14 +90,16 @@ def send_email(receiver, subject, body):
             will recieve the email. subject (str): Subject of
             the email. body (int): Text message of the email.
     """
-    sender = config.MAIL_DEFAULT_SENDER
+    sender = settings.get("STATS", "MAIL_DEFAULT_SENDER")
     msg = MIMEText(body, 'html')
     msg['Subject'] = subject
     msg['From'] = sender
     try:
-        smtpObj = smtplib.SMTP(config.MAIL_SERVER, config.MAIL_PORT)
+        smtpObj = smtplib.SMTP(settings.get("STATS", "MAIL_SERVER"),
+                               settings.get("STATS", "MAIL_PORT"))
         smtpObj.set_debuglevel(1)
-        smtpObj.login(config.MAIL_USERNAME, config.MAIL_PASSWORD)
+        smtpObj.login(settings.get("STATS", "MAIL_USERNAME"),
+                      settings.get("STATS", "MAIL_PASSWORD"))
         smtpObj.sendmail(sender, [receiver], msg.as_string())
         smtpObj.quit()
         logging.info("Successfully sent email")

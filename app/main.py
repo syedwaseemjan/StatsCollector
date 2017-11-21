@@ -1,82 +1,82 @@
 # -*- coding: utf-8 -*-
-import os
+import socket
 import logging
 import xml.etree.ElementTree as ET
-from models import get_or_create, save
-from tasks import upload_collector
+from models import Stats
+from app.tasks import upload_collector
 
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
-# create a file handler
-handler = logging.FileHandler('server.log')
-handler.setLevel(logging.INFO)
 
-# create a logging format
-formatter = logging.Formatter(
-    '[%(asctime)s: %(levelname)s/%(name)s] %(message)s')
-handler.setFormatter(formatter)
+class Main(object):
 
-# add the handlers to the logger
-logger.addHandler(handler)
-logging.getLogger("paramiko").addHandler(handler)
+    def __init__(self):
+        logging.basicConfig(level=logging.INFO)
 
+        # create a file handler
+        handler = logging.FileHandler('server.log')
+        handler.setLevel(logging.INFO)
 
-def parse_client(client):
-    """Parse the XML Element object and returns back dictionary.
+        # create a logging format
+        formatter = logging.Formatter(
+            '[%(asctime)s: %(levelname)s/%(name)s] %(message)s')
+        handler.setFormatter(formatter)
 
-    Attributes:
-            client (XMLELement): Client information from clients.xml
-    """
-    logger.info('IP: %s, Port: %s, Username: %s',
-                client.get('ip'), client.get('port'),
-                client.get('username'))
-    ip = client.get('ip')
-    port = int(client.get('port'))
-    email = client.get('mail')
-    username = client.get('username')
-    password = client.get('password')
-    cpu_threshold = client.find("alert[@type='memory']").attrib["limit"]
-    mem_threshold = client.find("alert[@type='cpu']").attrib["limit"]
+        # add the handlers to the logger
+        logger.addHandler(handler)
+        logging.getLogger("paramiko").addHandler(handler)
 
-    return {
-        "ip": ip,
-        "port": port,
-        "username": username,
-        "password": password,
-        "cpu_threshold": float(cpu_threshold[:-1]),
-        "mem_threshold": float(mem_threshold[:-1]),
-        "email": email
-    }
+    def parse_client(self, client):
+        """Parse the XML Element object and returns back dictionary.
 
+        Attributes:
+                client (XMLELement): Client information from clients.xml
+        """
+        logger.info('IP: %s, Port: %s, Username: %s',
+                    client.get('ip'), client.get('port'),
+                    client.get('username'))
+        ip = client.get('ip')
+        port = int(client.get('port'))
+        email = client.get('mail')
+        username = client.get('username')
+        password = client.get('password')
+        cpu_threshold = client.find("alert[@type='memory']").attrib["limit"]
+        mem_threshold = client.find("alert[@type='cpu']").attrib["limit"]
 
-def process_clients(file_path):
-    """This method is used to parse the clients.xml and provides the IP,
-    PORT, USERNAME, PASSWORD and EMAIL to upload_collector
+        return {
+            "ip": ip,
+            "port": port,
+            "username": username,
+            "password": password,
+            "cpu_threshold": float(cpu_threshold[:-1]),
+            "mem_threshold": float(mem_threshold[:-1]),
+            "email": email
+        }
 
-    Attributes:
-            file_path (str): path for clients.xml
-    """
-    logger.info('Config file path: %s' % file_path)
+    def process_clients(self, file_path):
+        """This method is used to parse the clients.xml and provides the IP,
+        PORT, USERNAME, PASSWORD and EMAIL to upload_collector
 
-    logger.info('Started parsing clients file')
-    try:
-        tree = ET.parse(file_path)
-        root = tree.getroot()
-        for client in root.findall('client'):
-            data = parse_client(client)
-            stats = get_or_create(**data)
-            save(stats)
-            upload_collector.delay(
-                data["ip"], data["port"], data["username"], data["password"])
-    except IOError as e:
-        logger.exception(e)
-        raise e
-    except ET.ParseError as e:
-        logger.exception(e)
-        raise e
+        Attributes:
+                file_path (str): path for clients.xml
+        """
+        logger.info('Config file path: %s' % file_path)
 
-
-if __name__ == '__main__':
-    clients_list = os.path.join(os.path.dirname(__file__), 'clients.xml')
-    process_clients(clients_list)
+        logger.info('Started parsing clients file')
+        try:
+            tree = ET.parse(file_path)
+            root = tree.getroot()
+            for client in root.findall('client'):
+                data = self.parse_client(client)
+                stats = Stats.get_or_create(**data)
+                Stats.save(stats)
+                upload_collector.delay(
+                    data["ip"], data["port"], data["username"],
+                    data["password"])
+        except socket.error as e:
+            logger.exception(e)
+            logger.info("Rabbitmq is not accessible.")
+            return False
+        except ET.ParseError as e:
+            logger.exception(e)
+            return False
