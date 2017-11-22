@@ -60,7 +60,7 @@ class Main(object):
         Attributes:
                 file_path (str): path for clients.xml
         """
-        logger.info('Config file path: %s' % file_path)
+        logger.info('Clients file path: %s' % file_path)
 
         logger.info('Started parsing clients file')
         try:

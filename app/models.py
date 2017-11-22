@@ -78,14 +78,14 @@ class DataAccessLayer(object):
     session = None
     engine = None
     db_path = os.path.abspath(os.path.join(os.path.dirname(
-        __file__), '..', settings.get("STATS", "DB_URI")))
+        __file__), '..', settings.get("DB", "DB_URI")))
     conn_string = 'sqlite:///{}'.format(db_path)
 
     def __init__(self, conn_string=None):
         logger.info(conn_string)
         self.engine = create_engine(
             conn_string or self.conn_string,
-            echo=settings.get("STATS", "SQLALCHEMY_ECHO", boolean=True))
+            echo=settings.get("DB", "SQLALCHEMY_ECHO", boolean=True))
         Session = sessionmaker(bind=self.engine)
         self.session = Session()
         Base.metadata.create_all(self.engine)

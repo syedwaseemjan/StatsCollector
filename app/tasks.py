@@ -6,10 +6,12 @@ import logging
 import paramiko
 from models import Stats
 from email.mime.text import MIMEText
+from email.header import Header
+from email.utils import formataddr
 from app import settings
 
 logger = logging.getLogger()
-app = Celery('tasks', broker=settings.get("STATS", "CELERY_BROKER"))
+app = Celery('tasks', broker=settings.get("CELERY", "CELERY_BROKER"))
 
 
 @app.task
@@ -90,17 +92,18 @@ def send_email(receiver, subject, body):
             will recieve the email. subject (str): Subject of
             the email. body (int): Text message of the email.
     """
-    sender = settings.get("STATS", "MAIL_DEFAULT_SENDER")
+    sender = settings.get("SMTP", "MAIL_USERNAME")
     msg = MIMEText(body, 'html')
     msg['Subject'] = subject
-    msg['From'] = sender
+    msg['From'] = formataddr((str(Header(settings.get(
+        "SMTP", "MAIL_DEFAULT_SENDER"), 'utf-8')), sender))
     try:
-        smtpObj = smtplib.SMTP(settings.get("STATS", "MAIL_SERVER"),
-                               settings.get("STATS", "MAIL_PORT"))
+        smtpObj = smtplib.SMTP(settings.get("SMTP", "MAIL_SERVER"),
+                               settings.get("SMTP", "MAIL_PORT", integer=True))
         smtpObj.set_debuglevel(1)
-        smtpObj.login(settings.get("STATS", "MAIL_USERNAME"),
-                      settings.get("STATS", "MAIL_PASSWORD"))
-        smtpObj.sendmail(sender, [receiver], msg.as_string())
+        smtpObj.login(settings.get("SMTP", "MAIL_USERNAME"),
+                      settings.get("SMTP", "MAIL_PASSWORD"))
+        smtpObj.sendmail(sender, receiver, msg.as_string())
         smtpObj.quit()
         logging.info("Successfully sent email")
     except smtplib.SMTPException as e:
