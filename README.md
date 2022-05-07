@@ -48,7 +48,7 @@ No worries. I have used sqlalchemy which will take care of initializing Database
 
 ## 3. Assumptions I have made.
 
-    I have assumed server.py will be run on *nix environment.
+    I have assumed run_server.py will be executed on *nix environment.
     I have assumed that clients mentioned in xml file will have access only by username and password and not by SSH KEY.
 
 ## 4. Requirements that I have not covered in my submission.
