@@ -1,3 +1,7 @@
+[![Flake8 Actions Status](https://github.com/syedwaseemjan/StatsCollector/actions/workflows/flake8.yaml/badge.svg)](https://github.com/syedwaseemjan/StatsCollector/actions/workflows/flake8.yaml)
+[![Black Actions Status](https://github.com/syedwaseemjan/StatsCollector/actions/workflows/black.yaml/badge.svg)](https://github.com/syedwaseemjan/StatsCollector/actions/workflows/black.yaml)
+[![Tests Actions Status](https://github.com/syedwaseemjan/StatsCollector/actions/workflows/tests.yaml/badge.svg)](https://github.com/syedwaseemjan/StatsCollector/actions/workflows/tests.yaml)
+
 # StatisticsCollector
 Python application to upload script into client machine, fetch machine statistics like (CPU, memory usage, uptime) and store it to sqlite DB.
 
