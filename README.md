@@ -34,7 +34,7 @@ The following assumes you have all of the recommended tools listed above install
 
 #### 3. Run the celery background task:
 	
-    $ celery -A app.tasks worker --loglevel=info -f server.log &
+    $ python bin/run_celery.py
 
     Celery is dependent on RabbitMq. RabbitMq is supposed to be setup and running before starting the celery app.
 
